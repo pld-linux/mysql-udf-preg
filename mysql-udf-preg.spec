@@ -6,7 +6,7 @@
 Summary:	MySQL UDF interface to PCRE
 Name:		mysql-udf-preg
 Version:	1.0
-Release:	0.1
+Release:	0.2
 License:	GPL v3
 Group:		Applications/Databases
 Source0:	http://www.mysqludf.org/lib_mysqludf_preg/lib_mysqludf_preg-%{version}.tar.gz
@@ -50,6 +50,19 @@ rm $RPM_BUILD_ROOT%{_libdir}/lib_mysqludf_preg.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+if [ "$1" = 1 ]; then
+	%banner -e %{name} <<-'EOF'
+	To actually use the functions execute on your MySQL instances:
+
+	zcat %{_docdir}/%{name}-%{version}/installdb.sql.gz | mysql
+
+	To remove the functions:
+	zcat %{_docdir}/%{name}-%{version}/uninstalldb.sql.gz | mysql
+
+	EOF
+fi
 
 %files
 %defattr(644,root,root,755)
