@@ -12,11 +12,13 @@ Group:		Applications/Databases
 Source0:	http://www.mysqludf.org/lib_mysqludf_preg/lib_mysqludf_preg-%{version}.tar.gz
 # Source0-md5:	c1837e6996417669d7d10bc1ae1d00e6
 URL:		http://www.mysqludf.org/lib_mysqludf_preg/index.php
-BuildRequires:	gcc-c++
 BuildRequires:	mysql-devel
 BuildRequires:	pcre-devel
 Requires:	mysql
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+# bug in configure makes it check for CXX if CXX is passed
+%undefine	__cxx
 
 %description
 MySQL UDF interface to the PCRE (Perl Compatible Regular Expressions)
