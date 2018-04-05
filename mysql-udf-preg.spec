@@ -17,6 +17,8 @@ BuildRequires:	pcre-devel
 Requires:	mysql
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define	plugindir	%{_libdir}/mysql/plugin
+
 # bug in configure makes it check for CXX if CXX is passed
 %undefine	__cxx
 
@@ -47,9 +49,10 @@ performance boost over the builtin RLIKE/REGEXP functions.
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__make} install \
+	libdir=%{plugindir} \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm $RPM_BUILD_ROOT%{_libdir}/lib_mysqludf_preg.la
+rm $RPM_BUILD_ROOT%{plugindir}/lib_mysqludf_preg.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -71,4 +74,4 @@ fi
 %defattr(644,root,root,755)
 %doc README.md AUTHORS ChangeLog INSTALL
 %doc installdb.sql uninstalldb.sql
-%attr(755,root,root) %{_libdir}/lib_mysqludf_preg.so
+%attr(755,root,root) %{plugindir}/lib_mysqludf_preg.so
