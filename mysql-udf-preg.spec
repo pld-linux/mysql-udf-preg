@@ -5,13 +5,13 @@
 #   insert .so with full path? patch mysqld?)
 Summary:	MySQL UDF interface to PCRE
 Name:		mysql-udf-preg
-Version:	1.0
-Release:	0.2
+Version:	1.2
+Release:	0.rc2.1
 License:	GPL v3
 Group:		Applications/Databases
-Source0:	http://www.mysqludf.org/lib_mysqludf_preg/lib_mysqludf_preg-%{version}.tar.gz
-# Source0-md5:	c1837e6996417669d7d10bc1ae1d00e6
-URL:		http://www.mysqludf.org/lib_mysqludf_preg/index.php
+Source0:	https://github.com/mysqludf/lib_mysqludf_preg/archive/lib_mysqludf_preg-%{version}-rc2.tar.gz
+# Source0-md5:	19641dc644573c4863937444fcc09f62
+URL:		https://github.com/mysqludf/lib_mysqludf_preg
 BuildRequires:	mysql-devel
 BuildRequires:	pcre-devel
 Requires:	mysql
@@ -37,7 +37,7 @@ subexpression from a regular expression, or simply as a slight
 performance boost over the builtin RLIKE/REGEXP functions.
 
 %prep
-%setup -q -n lib_mysqludf_preg-%{version}
+%setup -q -n lib_mysqludf_preg-lib_mysqludf_preg-%{version}-rc2
 
 %build
 %configure \
@@ -69,6 +69,6 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog INSTALL README
+%doc README.md AUTHORS ChangeLog INSTALL
 %doc installdb.sql uninstalldb.sql
 %attr(755,root,root) %{_libdir}/lib_mysqludf_preg.so
